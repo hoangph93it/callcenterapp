@@ -1,0 +1,44 @@
+﻿html, body {
+}
+
+@mixin ver-align-super {
+    vertical-align: super;
+}
+
+ul {
+    &.navbar-nav > li {
+        & > a {
+            span {
+                @include ver-align-super;
+            }
+        }
+    }
+}
+
+button {
+    span {
+        @include ver-align-super;
+    }
+}
+
+.footer {
+    height: 50px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    background-color: #9d9d9d;
+}
+
+.footer {
+    span {
+        line-height: 4;
+    }
+}
+
+.tbl-employees {
+    margin-top: 10px;
+}
+
+.btn-hide {
+    display: none;
+}

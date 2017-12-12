@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+@using System.Web.Optimization
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Home</title>
+    @Styles.Render("~/Content/css")
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="img-bg">
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/home/index"><i class="material-icons">home</i> <span>Home</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="material-icons">business</i> <span>Departments</span></a>
+                    </li>
+                    <li>
+                        <a href="/employees/index"><i class="material-icons">supervisor_account</i> <span>Employees</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="material-icons">contact_mail</i> <span>Emails</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="material-icons">contacts</i> <span>Customers</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="material-icons">contact_phone</i> <span>Call detail</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="material-icons">settings_phone</i> <span>Phone number</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="material-icons">settings_ethernet</i> <span>SNP</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <footer class="footer">
+        <span>&nbsp;&copy; @DateTime.Now.Year - CCVN</span>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+</body>
+</html>
