@@ -3,6 +3,8 @@ ul.navbar-nav > li > a span {
 
 button span {
   vertical-align: super; }
+button span.countdown {
+  vertical-align: baseline; }
 
 .footer {
   height: 50px;

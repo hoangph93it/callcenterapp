@@ -8,7 +8,7 @@ $(document).ready(function () {
 //loal list employees
 function loadEmployees() {
     $.ajax({
-        url: "/Employees/List",
+        url: "/Employees/ListEmpDepart",
         type: "GET",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
@@ -23,7 +23,7 @@ function loadEmployees() {
                 html += '<td>' + item.Gender + '</td>';
                 html += '<td>' + item.StartDate + '</td>';
                 html += '<td>' + item.EndDate + '</td>';
-                html += '<td>' + item.Id_Depart + '</td>';
+                html += '<td>' + item.DepartmentName + '</td>';
                 html += '<td><a class="btn btn-info btn-sm" onclick="getEmpByID(' + item.ID + ');"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>';
                 html += '<td><a class="btn btn-danger btn-sm" onclick="deleteEmployee(' + item.ID + ');"><span class="glyphicon glyphicon-remove"></span> Delete</a></td>';
                 html += '</tr>';
@@ -34,6 +34,31 @@ function loadEmployees() {
             $.toast({
                 heading: 'Thông báo',
                 text: 'Có lỗi xảy ra trong quá trình xử lý!',
+                showHideTransition: 'fade',
+                icon: 'error',
+                position: 'top-right'
+            })
+        }
+    })
+}
+//Load dropdownlist phòng ban
+function loadDepartment() {
+    $.ajax({
+        url: "/Department/ListDepartment",
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            var html = '';
+            $.each(result, function myfunction(key, item) {
+                html += '<option value=' + item.ID + '>' + item.Name + '</option>';
+            });
+            $('#emp_depart').html(html);
+        },
+        error: function (errormessage) {
+            $.toast({
+                heading: 'Thông báo',
+                text: 'Lỗi không thể load được danh sách phòng ban!',
                 showHideTransition: 'fade',
                 icon: 'error',
                 position: 'top-right'
@@ -52,7 +77,7 @@ function insertEmployees() {
         Gender: $('#emp_gender').val(),
         StartDate: $('#emp_startdate').val(),
         EndDate: $('#emp_endate').val(),
-        Id_Depart: $('#emp_depart').val()
+        Id_Depart: $("#emp_depart option:selected").val()
     };
     debugger
     $.ajax({
@@ -85,6 +110,7 @@ function insertEmployees() {
 }
 //Get employee by ID
 function getEmpByID(ID) {
+    $(".ctn-title").html(' <span class="glyphicon glyphicon-edit"></span>  Update an employee.');
     $('#emp_id').css('border-color', 'lightgrey');
     $('#emp_name').css('border-color', 'lightgrey');
     $('#emp_dob').css('border-color', 'lightgrey');
@@ -92,6 +118,8 @@ function getEmpByID(ID) {
     $('#emp_startdate').css('border-color', 'lightgrey');
     $('#emp_endate').css('border-color', 'lightgrey');
     $('#emp_depart').css('border-color', 'lightgrey');
+    loadDepartment();
+    debugger
     $.ajax({
         url: '/Employees/GetById/' + ID,
         type: 'GET',
@@ -105,7 +133,6 @@ function getEmpByID(ID) {
             $('#emp_gender').val(result.Gender),
             $('#emp_startdate').val(result.StartDate),
             $('#emp_endate').val(result.EndDate),
-            $('#emp_depart').val(result.Id_Depart)
             $('#modal_employees').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
@@ -124,6 +151,7 @@ function getEmpByID(ID) {
 }
 //update employee
 function Update() {
+    debugger
     var empObj = {
         ID: $('#emp_code').val(),
         EmployeeID: $('#emp_id').val(),
@@ -132,9 +160,8 @@ function Update() {
         Gender: $('#emp_gender').val(),
         StartDate: $('#emp_startdate').val(),
         EndDate: $('#emp_endate').val(),
-        Id_Depart: $('#emp_depart').val()
+        Id_Depart: $('#emp_depart option:selected').val()
     };
-    debugger
     $.ajax({
         url: '/Employees/Update',
         data: JSON.stringify(empObj),
@@ -207,6 +234,28 @@ function deleteEmployee(ID) {
             }
         }
     });
+}
+//Clear textbox
+function clearTextbox() {
+    $(".ctn-title").html(' <span class="glyphicon glyphicon-edit"></span>  Insert new an employee.');
+    $('#emp_code').val(""),
+    $('#emp_id').val(""),
+    $('#emp_name').val(""),
+    $('#emp_dob').val(""),
+    $('#emp_gender').val(""),
+    $('#emp_startdate').val(""),
+    $('#emp_endate').val(""),
+    $('#emp_depart').val("")
+    $('#btnUpdate').hide();
+    $('#btnAdd').show();
+    $('#emp_id').css('border-color', 'lightgrey');
+    $('#emp_name').css('border-color', 'lightgrey');
+    $('#emp_dob').css('border-color', 'lightgrey');
+    $('#emp_gender').css('border-color', 'lightgrey');
+    $('#emp_startdate').css('border-color', 'lightgrey');
+    $('#emp_endate').css('border-color', 'lightgrey');
+    $('#emp_depart').css('border-color', 'lightgrey');
+    loadDepartment();
 }
 //Valdidation using jquery
 function validate() {

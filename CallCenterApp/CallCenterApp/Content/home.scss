@@ -5,6 +5,10 @@
     vertical-align: super;
 }
 
+@mixin ver-align-baseline {
+    vertical-align: baseline;
+}
+
 ul {
     &.navbar-nav > li {
         & > a {
@@ -18,6 +22,10 @@ ul {
 button {
     span {
         @include ver-align-super;
+    }
+
+    span.countdown {
+        @include ver-align-baseline;
     }
 }
 

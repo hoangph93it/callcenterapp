@@ -15,6 +15,32 @@ namespace CallCenterApp.DataAccess
         //Declare connection string
         string constr = ConfigurationManager.ConnectionStrings["ConstrCallCenter"].ConnectionString;
         //Return list Employee
+        public List<EmployeeDepart> ListAllEmployeeDepart()
+        {
+            List<EmployeeDepart> lst = new List<EmployeeDepart>();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                con.Open();
+                SqlCommand com = new SqlCommand("SP_LIST_ALL_EMPLOYEE", con);
+                com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader rdr = com.ExecuteReader();
+                while (rdr.Read())
+                {
+                    lst.Add(new EmployeeDepart
+                    {
+                        ID = Int32.Parse(rdr["ID"].ToString()),
+                        EmployeeID = rdr["EmployeeID"].ToString(),
+                        Name = rdr["Name"].ToString(),
+                        DOB = rdr["DOB"].ToString(),
+                        Gender = rdr["Gender"].ToString(),
+                        StartDate = rdr["StartDate"].ToString(),
+                        EndDate = rdr["EndDate"].ToString(),
+                        DepartmentName = rdr["DepartmentName"].ToString()
+                    });
+                }
+                return lst;
+            }
+        }
         public List<Employees> ListAllEmployee()
         {
             List<Employees> lst = new List<Employees>();
@@ -35,7 +61,7 @@ namespace CallCenterApp.DataAccess
                         Gender = rdr["Gender"].ToString(),
                         StartDate = rdr["StartDate"].ToString(),
                         EndDate = rdr["EndDate"].ToString(),
-                        Id_Depart = rdr["Id_Depart"].ToString()
+                        Id_Depart = Int32.Parse(rdr["Id_Depart"].ToString()),
                     });
                 }
                 return lst;

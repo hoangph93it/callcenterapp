@@ -270,8 +270,28 @@ EXECUTE dbo.SP_TOTAL_CALL_CUS_STT;
 CREATE PROCEDURE SP_LIST_ALL_EMPLOYEE
 AS
 BEGIN
-	SELECT * FROM Employees emp
-	ORDER BY emp.StartDate DESC;
+	SELECT emp.ID
+		,emp.EmployeeID
+		,emp.Name
+		,emp.DOB
+		,emp.Gender
+		,emp.StartDate
+		,emp.EndDate
+		,dep.Name AS DepartmentName
+	FROM Employees emp
+	INNER JOIN Department dep ON emp.Id_Depart = dep.ID
+	ORDER BY emp.ID ASC;
+END;
+--Viết Store drodown list phòng ban
+CREATE PROCEDURE SP_DROPDOWN_LIST_DEPARMENT
+AS
+BEGIN
+	SELECT depart.ID
+		,depart.Name
+		,depart.StartDate
+		,depart.Manager
+	FROM Department depart
+	ORDER BY depart.ID ASC;
 END;
 --Viết Store thêm mới, chỉnh sửa nhân viên
 CREATE PROCEDURE SP_INSERT_UPDATE_EMPLOYEE (
@@ -320,7 +340,7 @@ BEGIN
 			,Gender = @Gender
 			,StartDate = @StartDate
 			,EndDate = @EndDate
-			,Id_Depart = Id_Depart
+			,Id_Depart = @Id_Depart
 		 WHERE ID=@ID;
 	END;
 END;
@@ -332,10 +352,10 @@ BEGIN
 	FROM Employees
 	WHERE ID = @ID;
 END;
----
+---Set 2 khóa chính cho bảng
 ALTER TABLE Employees
 ADD CONSTRAINT PK_ID_EMPID PRIMARY KEY(ID, EmployeeID)
----
+---Update 2 khóa chính của bảng
 ALTER TABLE CallDetail
    ADD CONSTRAINT FK_ID_EMPID_CALL
    FOREIGN KEY(Id_Emp, EmployeeID)

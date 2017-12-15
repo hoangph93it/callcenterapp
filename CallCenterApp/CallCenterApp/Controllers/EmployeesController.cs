@@ -15,13 +15,17 @@ namespace CallCenterApp.Controllers
         {
             return View();
         }
+        public JsonResult ListEmpDepart()
+        {
+            return Json(emp_db.ListAllEmployeeDepart(), JsonRequestBehavior.AllowGet);
+        }
         public JsonResult List()
         {
             return Json(emp_db.ListAllEmployee(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetById(int ID)
         {
-            var emp = emp_db.ListAllEmployee().Find(em => em.ID.Equals(ID));
+            var emp = emp_db.ListAllEmployeeDepart().Find(em => em.ID.Equals(ID));
             return Json(emp, JsonRequestBehavior.AllowGet);
         }
 
