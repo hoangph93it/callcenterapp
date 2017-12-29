@@ -143,14 +143,21 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-table.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\call.svg" />
     <Content Include="Content\Images\callcenter.jpg" />
+    <Content Include="Content\Images\user.svg" />
     <Content Include="Content\jquery-confirm.min.css" />
     <Content Include="Content\jquery.toast.css" />
+    <Content Include="Content\loading-bar.css" />
+    <Content Include="Content\mdb.min.css" />
+    <Content Include="Content\theme-default.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -201,6 +208,11 @@
     <Content Include="Content\home.scss" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-table-contextmenu.js" />
+    <Content Include="Scripts\bootstrap-table-contextmenu.min.js" />
+    <Content Include="Scripts\bootstrap-table-export.js" />
+    <Content Include="Scripts\bootstrap-table-zh-CN.min.js" />
+    <Content Include="Scripts\bootstrap-table.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\employees\employees.js" />
@@ -295,14 +307,19 @@
     <Content Include="Scripts\jquery-confirm.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.form-validator.min.js" />
     <Content Include="Scripts\jquery.toast.js" />
+    <Content Include="Scripts\jquery.twbsPagination.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\mdb.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\tableExport.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -313,8 +330,10 @@
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DataAccess\DeapartmentDB.cs" />
     <Compile Include="DataAccess\EmployeesDB.cs" />
+    <Compile Include="DataAccess\Helpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -335,6 +354,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

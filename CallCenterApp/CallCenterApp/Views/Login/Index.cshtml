@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="loading-bar"></div>
+    <div class="container">
+        <div class="mainbox login-box col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-login">
+                <div class="txt-login">ĐĂNG NHẬP HỆ THỐNG</div>
+                <div class="panel-body">
+                    <form id="loginform" class="form-horizontal" role="form">
+                        <ul class="ul-login">
+                            <li class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-line-height">
+                                <img src="/content/images/call.svg" class="logo-login" />
+                            </li>
+                            <li class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <div class="input-group input-user">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user glyphicon-color"></i></span>
+                                    <input type="text" class="form-control" name="username" placeholder="User name" autofocus required>
+                                </div>
+                                <div class="input-group input-password">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock glyphicon-color"></i></span>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                </div>
+                                <div class="form-group input-login">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-primary btn-dangnhap">Login</button>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+</body>
+</html>

@@ -9,43 +9,62 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="img-bg">
+    <div id="loading" class="loading-panel">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <div class="loading-panel loading-panel-color"></div>
+    </div>
     <div class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/home/index"><i class="material-icons">home</i> <span>Home</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="material-icons">business</i> <span>Departments</span></a>
-                    </li>
-                    <li>
-                        <a href="/employees/index"><i class="material-icons">supervisor_account</i> <span>Employees</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="material-icons">contact_mail</i> <span>Emails</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="material-icons">contacts</i> <span>Customers</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="material-icons">contact_phone</i> <span>Call detail</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="material-icons">settings_phone</i> <span>Phone number</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="material-icons">settings_ethernet</i> <span>SNP</span></a>
-                    </li>
-                </ul>
-            </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/home/index"><i class="material-icons">home</i> <span>Home</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">business</i> <span>Departments</span></a>
+                </li>
+                <li>
+                    <a href="/employees/index"><i class="material-icons">supervisor_account</i> <span>Employees</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">contact_mail</i> <span>Emails</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">contacts</i> <span>Customers</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">contact_phone</i> <span>Call detail</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">settings_phone</i> <span>Phone number</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">settings_ethernet</i> <span>SNP</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">trending_up</i> <span>Report</span></a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle user-color cursor-pointer" data-toggle="dropdown"><i class="material-icons">account_circle</i>&nbsp;<span>HoangPH - Service Department</span><span class="caret caret-color"></span></a>
+                    <ul class="dropdown-menu fn-user">
+                        <li><a href="#"><i class="material-icons">person</i><span> Cá nhân</span></a></li>
+                        <li><a href="#"><i class="material-icons">vpn_key</i><span> Đổi mật khẩu</span> </a></li>
+                        <li><a href="#"><i class="material-icons">power_settings_new</i><span> Đăng xuất</span> </a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="container">
@@ -55,5 +74,22 @@
         <span>&nbsp;&copy; @DateTime.Now.Year - CCVN</span>
     </footer>
     @Scripts.Render("~/bundles/jquery")
+    <style>
+        .dropdown:hover > .dropdown-menu {
+            display: block;
+            background-color: #eee;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            background-clip: unset !important;
+        }
+
+        .dropdown-menu > li.li-dropdown > a {
+            white-space: initial !important;
+        }
+
+        .navbar-nav > li > .dropdown-menu {
+            padding-right: 0px !important;
+        }
+    </style>
 </body>
 </html>

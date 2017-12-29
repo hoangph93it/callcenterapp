@@ -1,32 +1,119 @@
-﻿html, body {
+﻿html {
 }
 
-@mixin ver-align-super {
+body {
+}
+//declare mixin<<
+@mixin non-padding-top-bot {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+@mixin padding-top-bot-five {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+//>>
+//declare extend<<
+.color-white {
+    color: #fff !important;
+}
+
+.vertic-super {
     vertical-align: super;
 }
 
-@mixin ver-align-baseline {
-    vertical-align: baseline;
+.context-menu-hover {
+    color: #fff !important;
+    background-color: #428bca !important;
 }
 
-ul {
-    &.navbar-nav > li {
-        & > a {
-            span {
-                @include ver-align-super;
+//>>
+//menu<<
+.navbar-inverse {
+    background-color: #185c65 !important;
+    border-color: #185c65 !important;
+    border-bottom-color: #53adb8 !important;
+
+    .navbar-nav {
+        > li.open {
+            > a {
+                background-color: #175058 !important;
+            }
+        }
+
+        li {
+            a {
+                @include non-padding-top-bot;
+                color: #ccc !important;
+
+                &:hover {
+                    @extend .color-white;
+                }
+
+                &.active {
+                    @extend .color-white;
+                }
+
+                span {
+                    @extend .vertic-super;
+                }
+            }
+        }
+    }
+
+    .navbar-right {
+        li {
+            a {
+                span {
+                    @extend .vertic-super;
+
+                    &.caret {
+                        vertical-align: text-top;
+                        margin-top: 2px;
+                    }
+                }
+            }
+
+            .fn-user {
+                width: 100%;
+
+                li {
+                    a {
+                        @include padding-top-bot-five;
+                        color: #333 !important;
+                        padding-left: 15px;
+
+                        &:hover {
+                            @extend .context-menu-hover;
+                        }
+
+                        i {
+                            font-size: 20px !important;
+                        }
+
+                        span {
+                            @extend .vertic-super;
+                        }
+                    }
+                }
             }
         }
     }
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+//>>
 button {
-    span {
-        @include ver-align-super;
+    span.super {
+        @extend .vertic-super;
     }
+}
 
-    span.countdown {
-        @include ver-align-baseline;
-    }
+#collapse_search {
+    padding-top: 10px;
 }
 
 .footer {
@@ -50,3 +137,330 @@ button {
 .btn-hide {
     display: none;
 }
+
+.remove {
+    margin-left: 10px;
+}
+
+ul.context-menu {
+    li {
+        a {
+            &:hover {
+                @extend .context-menu-hover;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.navbar {
+    border-radius: 0px !important;
+}
+
+::-webkit-input-placeholder {
+    font-style: italic;
+}
+
+:-moz-placeholder {
+    font-style: italic;
+}
+
+::-moz-placeholder {
+    font-style: italic;
+}
+
+:-ms-input-placeholder {
+    font-style: italic;
+}
+//form Login<<
+.login-box {
+    margin-top: 20vh;
+}
+
+.panel-login {
+    background: #eee !important;
+    border: 0px !important;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75) !important;
+}
+
+.ul-login {
+    list-style-type: none;
+    padding: 0px !important;
+    text-decoration: none;
+
+    li {
+        float: left;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+.logo-login {
+    height: 100px;
+    width: 100px;
+}
+
+.txt-login {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 22px;
+    font-family: 'UTM_Aurora';
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #185c65;
+    padding: 15px 0px 15px 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.input-user {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.input-password {
+    margin-bottom: 15px;
+}
+
+.input-login {
+    margin-top: 10px;
+}
+
+.glyphicon-color {
+    color: #2694db;
+}
+
+.btn-dangnhap {
+    background-color: #2694db !important;
+    border-color: #2694db !important;
+    color: #fff;
+    font-family: 'UTM_Avo';
+    font-size: 16px;
+    float: left;
+
+    &:hover {
+        background-color: #337ab7 !important;
+        border-color: #2e6da4 !important;
+    }
+}
+//>>
+//spinner loading<<
+.loading-panel {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 10000;
+
+    & > div.loading-panel-color {
+        background-color: azure;
+        opacity: 0.4;
+        z-index: 10001;
+    }
+}
+
+.spinner {
+    width: 70px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10002;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    & > div {
+        width: 18px;
+        height: 18px;
+        background-color: #337ab7;
+        border-radius: 100%;
+        display: inline-block;
+        -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .bounce1 {
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+
+    .bounce2 {
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
+}
+
+@-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+    }
+
+    40% {
+        -webkit-transform: scale(1.0);
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+}
+//>>
+//loading bar form login<<
+.app-loading .loading-bar {
+    display: block;
+    -webkit-animation: shift-rightwards 1s ease-in-out infinite;
+    -moz-animation: shift-rightwards 1s ease-in-out infinite;
+    -ms-animation: shift-rightwards 1s ease-in-out infinite;
+    -o-animation: shift-rightwards 1s ease-in-out infinite;
+    animation: shift-rightwards 1s ease-in-out infinite;
+    -webkit-animation-delay: .4s;
+    -moz-animation-delay: .4s;
+    -o-animation-delay: .4s;
+    animation-delay: .4s;
+}
+
+.loading-bar {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 800;
+    background: #0f7bff;
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+@-webkit-keyframes shift-rightwards {
+    0% {
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    40% {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    60% {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    100% {
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+
+@-moz-keyframes shift-rightwards {
+    0% {
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    40% {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    60% {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    100% {
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+
+@-o-keyframes shift-rightwards {
+    0% {
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    40% {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    60% {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    100% {
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+
+@keyframes shift-rightwards {
+    0% {
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    40% {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    60% {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    100% {
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+//>>

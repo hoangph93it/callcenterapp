@@ -5,19 +5,22 @@ $(document).ready(function () {
     var wh = $(window).height();
     $('.img-bg').css({ "height": wh - 50 + "px" });
 
-    $('#DOB').datetimepicker({
+    $('#emp_dob').datetimepicker({
         locale: 'vi',
         format: 'DD/MM/YYYY'
     });
-    $('#StartDate').datetimepicker({
+    $('#emp_startdate').datetimepicker({
         locale: 'vi',
         format: 'DD/MM/YYYY'
     });
-    $('#EndDate').datetimepicker({
+    $('#emp_endate').datetimepicker({
         locale: 'vi',
         format: 'DD/MM/YYYY'
     });
 
+    var path = window.location.pathname;
+    var url = $('ul.nav li a[href="' + path + '"]');
+    url.addClass('active');
     //$("#datepicker").datepicker({
     //    dateFormat: "dd/mm/yy",
     //    changeMonth: true,
@@ -71,3 +74,13 @@ $(document).ready(function () {
 
     //}));
 })
+var $loading = $('#loading').hide();
+$(document)
+  .ajaxStart(function () {
+      $loading.show();
+      $("body").addClass("app-loading");
+  })
+  .ajaxStop(function () {
+      $loading.hide();
+      $("body").removeClass("app-loading");
+  });

@@ -275,11 +275,51 @@ BEGIN
 		,emp.Name
 		,emp.DOB
 		,emp.Gender
+		,emp.HomeAddress
+		,emp.Phone
+		,emp.Email
 		,emp.StartDate
 		,emp.EndDate
 		,dep.Name AS DepartmentName
 	FROM Employees emp
 	INNER JOIN Department dep ON emp.Id_Depart = dep.ID
+	ORDER BY emp.ID ASC;
+END;
+--Viết store tìm kiếm nhân viên với tham số truyền vào mã nhân viên, tên nhân viên và phòng ban.
+CREATE PROCEDURE SP_SEARCH_EMPLOYEES (
+	@EmployeeID NVARCHAR(50) = NULL
+	,@Name NVARCHAR(50) = NULL
+	,@Id_Depart INT = NULL
+	)
+AS
+BEGIN
+	SELECT emp.ID
+		,emp.EmployeeID
+		,emp.Name
+		,emp.DOB
+		,emp.Gender
+		,emp.HomeAddress
+		,emp.Phone
+		,emp.Email
+		,emp.StartDate
+		,emp.EndDate
+		,dep.Name AS DepartmentName
+	FROM Employees emp
+	INNER JOIN Department dep ON emp.Id_Depart = dep.ID
+	WHERE Id_Depart = @Id_Depart
+		AND (
+			(emp.EmployeeID LIKE '%' + IsNull(@EmployeeID, emp.EmployeeID) + '%')
+			AND Id_Depart = @Id_Depart
+			)
+		AND (
+			(emp.Name LIKE '%' + IsNull(@Name, emp.Name) + '%')
+			AND Id_Depart = @Id_Depart
+			)
+		AND (
+			(emp.EmployeeID LIKE '%' + IsNull(@EmployeeID, emp.EmployeeID) + '%')
+			AND (emp.Name LIKE '%' + IsNull(@Name, emp.Name) + '%')
+			AND Id_Depart = @Id_Depart
+			)
 	ORDER BY emp.ID ASC;
 END;
 --Viết Store drodown list phòng ban
@@ -295,53 +335,75 @@ BEGIN
 END;
 --Viết Store thêm mới, chỉnh sửa nhân viên
 CREATE PROCEDURE SP_INSERT_UPDATE_EMPLOYEE (
-	 @ID INTEGER = NULL
-	,@EmployeeID NVARCHAR(50)= NULL
-	,@Name NVARCHAR(50)= NULL
-	,@DOB NVARCHAR(50)= NULL
-	,@Gender NVARCHAR(50)= NULL
-	,@StartDate NVARCHAR(50)= NULL
-	,@EndDate NVARCHAR(50)= NULL
-	,@Id_Depart NVARCHAR(50)= NULL
-	,@Action varchar(10)= NULL
+	@ID INT = NULL
+	,@EmployeeID NVARCHAR(50) = NULL
+	,@Name NVARCHAR(50) = NULL
+	,@DOB NVARCHAR(50) = NULL
+	,@Gender NVARCHAR(50) = NULL
+	,@HomeAddress NVARCHAR(150) = NULL
+	,@Phone INT = NULL
+	,@Email NVARCHAR(50) = NULL
+	,@StartDate NVARCHAR(50) = NULL
+	,@EndDate NVARCHAR(50) = NULL
+	,@Id_Depart NVARCHAR(50) = NULL
+	,@Action VARCHAR(10) = NULL
+	,@Error INT = NULL OUTPUT
 	)
 AS
 BEGIN
-	--Thêm mới nhân viên
-	IF @Action = 'INSERT'
-	BEGIN
-		INSERT INTO Employees(
-			EmployeeID
-			,Name
-			,DOB
-			,Gender
-			,StartDate
-			,EndDate
-			,Id_Depart
+	--Check trùng mã
+	IF EXISTS (
+			SELECT *
+			FROM Employees
+			WHERE EmployeeID = LTRIM(RTRIM(@EmployeeID))
 			)
-		VALUES (
-			@EmployeeID
-			,@Name
-			,@DOB
-			,@Gender
-			,@StartDate
-			,@EndDate
-			,@Id_Depart
-			);
+		SET @Error = - 1;
+	ELSE
+	BEGIN
+		--Thêm mới nhân viên
+		IF @Action = 'INSERT'
+		BEGIN
+			INSERT INTO Employees (
+				EmployeeID
+				,Name
+				,DOB
+				,Gender
+				,HomeAddress
+				,Phone
+				,Email
+				,StartDate
+				,EndDate
+				,Id_Depart
+				)
+			VALUES (
+				LTRIM(RTRIM(@EmployeeID))
+				,LTRIM(RTRIM(@Name))
+				,LTRIM(RTRIM(@DOB))
+				,LTRIM(RTRIM(@Gender))
+				,LTRIM(RTRIM(@HomeAddress))
+				,LTRIM(RTRIM(@Phone))
+				,LTRIM(RTRIM(@Email))
+				,LTRIM(RTRIM(@StartDate))
+				,LTRIM(RTRIM(@EndDate))
+				,LTRIM(RTRIM(@Id_Depart))
+				);
+		END;
 	END;
 	--Chỉnh sửa nhân viên
-	IF @Action='UPDATE'
+	IF @Action = 'UPDATE'
 	BEGIN
 		UPDATE Employees
-		SET 
-			EmployeeID = @EmployeeID
-			,Name = @Name
-			,DOB = @DOB
-			,Gender = @Gender
-			,StartDate = @StartDate
-			,EndDate = @EndDate
-			,Id_Depart = @Id_Depart
-		 WHERE ID=@ID;
+		SET EmployeeID = LTRIM(RTRIM(@EmployeeID))
+			,Name = LTRIM(RTRIM(@Name))
+			,DOB = LTRIM(RTRIM(@DOB))
+			,Gender = LTRIM(RTRIM(@Gender))
+			,HomeAddress = LTRIM(RTRIM(@HomeAddress))
+			,Phone = LTRIM(RTRIM(@Phone))
+			,Email = LTRIM(RTRIM(@Email))
+			,StartDate = LTRIM(RTRIM(@StartDate))
+			,EndDate = LTRIM(RTRIM(@EndDate))
+			,Id_Depart = LTRIM(RTRIM(@Id_Depart))
+		WHERE ID = @ID;
 	END;
 END;
 --Viết Store xóa một nhân viên
@@ -360,3 +422,27 @@ ALTER TABLE CallDetail
    ADD CONSTRAINT FK_ID_EMPID_CALL
    FOREIGN KEY(Id_Emp, EmployeeID)
    REFERENCES Employees(ID, EmployeeID)
+--Viết Store Login
+CREATE PROCEDURE SP_LOGIN (
+	 @UserName NVARCHAR(50) = NULL
+	,@PASSWORD NVARCHAR(50) = NULL
+	,@Error INT = NULL OUTPUT
+	)
+AS
+BEGIN
+	--Check sự tồn tại của user
+	IF NOT EXISTS (
+			SELECT * 
+			FROM Users
+			WHERE UserName = LTRIM(RTRIM(@UserName)) AND PassWord = LTRIM(RTRIM(@PASSWORD))
+			)
+		SET @Error = - 1;
+	ELSE
+	BEGIN
+		--Lấy ra thông tin user
+		SELECT * FROM Users
+		WHERE UserName = LTRIM(RTRIM(@UserName)) AND PassWord = LTRIM(RTRIM(@PASSWORD))
+		
+	END;
+	
+END;

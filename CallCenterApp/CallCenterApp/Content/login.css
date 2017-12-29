@@ -1,0 +1,55 @@
+.login-box {
+  margin-top: 20vh; }
+
+.panel-login {
+  background: #f2f2f2;
+  border-color: #f2f2f2;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75); }
+
+.ul-login {
+  list-style-type: none;
+  padding: 0px !important;
+  text-decoration: none; }
+  .ul-login li {
+    float: left;
+    display: inline-block;
+    text-align: center; }
+
+.logo-login {
+  height: 100px;
+  width: 100px; }
+
+.txt-login {
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 22px;
+  font-family: 'UTM_Aurora';
+  text-transform: uppercase;
+  color: #2694db;
+  padding: 20px 0px 20px 0px; }
+
+.input-user {
+  margin-bottom: 15px;
+  width: 100%; }
+
+.input-password {
+  margin-bottom: 15px; }
+
+.input-login {
+  margin-top: 10px; }
+
+.glyphicon-color {
+  color: #2694db; }
+
+.btn-dangnhap {
+  background-color: #2694db !important;
+  border-color: #2694db !important;
+  color: #fff;
+  font-family: 'UTM_Avo';
+  font-size: 16px;
+  float: left; }
+  .btn-dangnhap:hover {
+    background-color: #337ab7 !important;
+    border-color: #2e6da4 !important; }
+
+/*# sourceMappingURL=login.css.map */

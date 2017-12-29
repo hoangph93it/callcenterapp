@@ -22,13 +22,22 @@ namespace CallCenterApp.App_Start
                 "~/Scripts/moment-with-locales.js",
                 "~/Scripts/bootstrap-datetimepicker.js",
                 "~/Scripts/jquery-confirm.min.js",
-                "~/Scripts/jquery.unobtrusive-ajax.js"));
+                "~/Scripts/jquery.unobtrusive-ajax.js",
+                "~/Scripts/jquery.form-validator.min.js",
+                "~/Scripts/jquery.twbsPagination.min.js",
+                "~/Scripts/bootstrap-table.min.js",
+                "~/Scripts/bootstrap-table-contextmenu.js",
+                "~/Scripts/bootstrap-table-export.js",
+                "~/Scripts/tableExport.js",
+                "~/Scripts/pace.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/home.css",
                 "~/Content/bootstrap.min.css",
                 "~/Content/jquery.toast.css",
                 "~/Content/jquery-confirm.min.css",
-                "~/Content/bootstrap-datetimepicker.css"));
+                "~/Content/bootstrap-datetimepicker.css",
+                "~/Content/theme-default.min.css",
+                "~/Content/bootstrap-table.min.css"));
         }
     }
 }

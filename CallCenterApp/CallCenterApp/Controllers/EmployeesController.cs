@@ -19,9 +19,10 @@ namespace CallCenterApp.Controllers
         {
             return Json(emp_db.ListAllEmployeeDepart(), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult List()
+        
+        public JsonResult SearchEmpDepart(string EmployeeID, string Name, int ? Id_Depart)
         {
-            return Json(emp_db.ListAllEmployee(), JsonRequestBehavior.AllowGet);
+            return Json(emp_db.SearchEmployee(EmployeeID, Name, Id_Depart), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetById(int ID)
         {
